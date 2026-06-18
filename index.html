@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeslaSys Chile | Sistema de Registro de Solicitudes de Soporte</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ENCABEZADO -->
+  <header class="encabezado">
+    <h1 class="encabezado__empresa">TeslaSys Chile</h1>
+    <p class="encabezado__titulo">Sistema de Registro de Solicitudes de Soporte</p>
+  </header>
+
+  <main class="contenedor">
+
+    <!-- FORMULARIO -->
+    <section class="panel panel--formulario" aria-labelledby="form-titulo">
+      <h2 id="form-titulo">Nueva Solicitud de Soporte</h2>
+
+      <form id="formSolicitud" novalidate>
+
+        <div class="campo">
+          <label for="nombre">Nombre del colaborador</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre">
+        </div>
+
+        <div class="campo">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo" placeholder="Ingrese su correo electrónico">
+        </div>
+
+        <div class="campo">
+          <label for="area">Área de trabajo</label>
+          <input type="text" id="area" name="area" placeholder="Ingrese el área de trabajo">
+        </div>
+
+        <div class="campo">
+          <label for="tipo">Tipo de solicitud</label>
+          <select id="tipo" name="tipo">
+            <option value="" disabled selected>Seleccione una opción</option>
+            <option value="Hardware">Hardware</option>
+            <option value="Software">Software</option>
+            <option value="Redes">Redes</option>
+            <option value="Seguridad">Seguridad</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="descripcion">Descripción del problema</label>
+          <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describa el problema que presenta..."></textarea>
+        </div>
+
+        <!-- Mensajes de validación / éxito -->
+        <div id="mensajeEstado" class="mensaje" role="alert" aria-live="polite"></div>
+
+        <div class="botones">
+          <button type="button" id="btnRegistrar" class="btn btn--primario">Registrar Solicitud</button>
+          <button type="button" id="btnLimpiar" class="btn btn--secundario">Limpiar Formulario</button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- SOLICITUDES REGISTRADAS -->
+    <section class="panel panel--tabla" aria-labelledby="tabla-titulo">
+      <h2 id="tabla-titulo">Solicitudes Registradas</h2>
+
+      <div class="tabla-wrapper">
+        <table id="tablaSolicitudes">
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>Nombre</th>
+              <th>Área</th>
+              <th>Tipo de Solicitud</th>
+              <th>Descripción</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpoTabla">
+            <!-- Las filas se generan dinámicamente con JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <p id="totalSolicitudes" class="total-info">Total de solicitudes registradas: 0</p>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>TeslaSys Chile · Área de Soporte TI</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

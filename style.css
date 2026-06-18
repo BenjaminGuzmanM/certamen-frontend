@@ -1,0 +1,491 @@
+/* =========================================================
+   TeslaSys Chile — Sistema de Registro de Solicitudes de Soporte
+   Paleta oscura, minimalista, inspirada en Linear / Vercel
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* --- Color --- */
+  --bg: #0a0b0d;
+  --surface: #13151a;
+  --surface-hover: #1a1d24;
+  --border: #23262e;
+  --border-strong: #2e323c;
+  --text: #e6e8ec;
+  --text-muted: #8a8f9c;
+  --text-faint: #565b66;
+  --accent: #5b8def;
+  --accent-strong: #7aa3f5;
+  --accent-glow: rgba(91, 141, 239, 0.15);
+
+  /* --- Estados semánticos (sutiles, no saturados) --- */
+  --ok: #4ade80;
+  --ok-bg: rgba(74, 222, 128, 0.08);
+  --ok-border: rgba(74, 222, 128, 0.25);
+  --error: #f87171;
+  --error-bg: rgba(248, 113, 113, 0.08);
+  --error-border: rgba(248, 113, 113, 0.25);
+
+  /* --- Tipografía --- */
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+
+  /* --- Geometría --- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* --- Sombra de elevación, muy contenida --- */
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -8px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------------------------------------------------------
+   Reset base
+   --------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  /* Difuminado ambiental extremadamente sutil, sin ruido visual */
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(91, 141, 239, 0.06), transparent 60%),
+    radial-gradient(ellipse 700px 400px at 100% 10%, rgba(91, 141, 239, 0.04), transparent 55%);
+  background-repeat: no-repeat;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------------------------------------------------------
+   Encabezado
+   --------------------------------------------------------- */
+.encabezado {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 22px 40px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Firma visual: línea de gradiente animada, único movimiento de la página */
+.encabezado::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent) 20%,
+    var(--accent-strong) 40%,
+    var(--accent) 60%,
+    transparent 80%
+  );
+  background-size: 200% 100%;
+  opacity: 0.6;
+  animation: deslizarGradiente 8s linear infinite;
+}
+
+@keyframes deslizarGradiente {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.encabezado__empresa {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.encabezado__titulo {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ---------------------------------------------------------
+   Layout principal
+   --------------------------------------------------------- */
+.contenedor {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .contenedor {
+    grid-template-columns: 1fr;
+    padding: 24px 20px;
+  }
+}
+
+/* ---------------------------------------------------------
+   Paneles
+   --------------------------------------------------------- */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+
+.panel h2 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 22px;
+  color: var(--text);
+}
+
+/* ---------------------------------------------------------
+   Formulario
+   --------------------------------------------------------- */
+.campo {
+  margin-bottom: 18px;
+}
+
+.campo label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 7px;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--text);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+  color: var(--text-faint);
+}
+
+.campo input:hover,
+.campo select:hover,
+.campo textarea:hover {
+  border-color: var(--border-strong);
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--surface-hover);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.campo select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%238A8F9C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+  cursor: pointer;
+}
+
+.campo select option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.campo textarea {
+  resize: vertical;
+  min-height: 88px;
+}
+
+/* ---------------------------------------------------------
+   Mensajes de validación / estado
+   --------------------------------------------------------- */
+.mensaje {
+  font-size: 13px;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 18px;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  animation: aparecer 0.2s ease;
+}
+
+.mensaje:empty {
+  display: none;
+}
+
+.mensaje--error {
+  display: block;
+  background: var(--error-bg);
+  border: 1px solid var(--error-border);
+  color: var(--error);
+}
+
+.mensaje--exito {
+  display: block;
+  background: var(--ok-bg);
+  border: 1px solid var(--ok-border);
+  color: var(--ok);
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------------------------------------------------
+   Botones
+   --------------------------------------------------------- */
+.botones {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.btn {
+  flex: 1;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.1s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn--primario {
+  position: relative;
+  background: var(--accent);
+  color: #0a0b0d;
+  font-weight: 600;
+  overflow: hidden;
+}
+
+.btn--primario::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.25), transparent 70%);
+  background-size: 200% 100%;
+  background-position: 150% 0;
+  transition: background-position 0.5s ease;
+}
+
+.btn--primario:hover {
+  background: var(--accent-strong);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+.btn--primario:hover::before {
+  background-position: -50% 0;
+}
+
+.btn--secundario {
+  background: transparent;
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+
+.btn--secundario:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+  background: var(--surface-hover);
+}
+
+/* ---------------------------------------------------------
+   Tabla de solicitudes
+   --------------------------------------------------------- */
+.tabla-wrapper {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: var(--surface-hover);
+}
+
+th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  padding: 14px 16px;
+  font-size: 13.5px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+td:first-child {
+  font-family: var(--font-mono);
+  color: var(--text-faint);
+  font-size: 12.5px;
+}
+
+.tabla-vacia {
+  text-align: center;
+  color: var(--text-faint);
+  padding: 32px 16px !important;
+  font-size: 13.5px;
+}
+
+/* ---------------------------------------------------------
+   Etiquetas de tipo de solicitud
+   --------------------------------------------------------- */
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.etiqueta--hardware {
+  background: rgba(91, 141, 239, 0.1);
+  border-color: rgba(91, 141, 239, 0.3);
+  color: #8fb3f5;
+}
+
+.etiqueta--software {
+  background: rgba(74, 222, 128, 0.1);
+  border-color: rgba(74, 222, 128, 0.3);
+  color: #6ee0a0;
+}
+
+.etiqueta--redes {
+  background: rgba(192, 132, 252, 0.1);
+  border-color: rgba(192, 132, 252, 0.3);
+  color: #c9a3f8;
+}
+
+.etiqueta--seguridad {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.3);
+  color: #f9cd5e;
+}
+
+/* ---------------------------------------------------------
+   Botón eliminar
+   --------------------------------------------------------- */
+.btn-eliminar {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-faint);
+  border-radius: var(--radius-sm);
+  width: 30px;
+  height: 30px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-eliminar:hover {
+  color: var(--error);
+  border-color: var(--error-border);
+  background: var(--error-bg);
+}
+
+/* ---------------------------------------------------------
+   Pie de tabla
+   --------------------------------------------------------- */
+.total-info {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------
+   Footer
+   --------------------------------------------------------- */
+.footer {
+  text-align: center;
+  padding: 22px;
+  font-size: 12.5px;
+  color: var(--text-faint);
+  border-top: 1px solid var(--border);
+}
+
+/* ---------------------------------------------------------
+   Accesibilidad: reduced motion
+   --------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .encabezado::after {
+    animation: none;
+  }
+  .mensaje {
+    animation: none;
+  }
+  .btn--primario::before {
+    transition: none;
+  }
+}

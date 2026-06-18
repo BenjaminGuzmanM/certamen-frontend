@@ -1,0 +1,133 @@
+EVIDENCIA DEL USO DE INTELIGENCIA ARTIFICIAL
+Proyecto: TeslaSys Chile - Sistema de Registro de Solicitudes de Soporte
+
+Herramienta utilizada:
+Claude (Anthropic)
+
+(Importante, se adjuntó el archivo html además el archivo javascript con las funciones para que pueda contextualizar mejor el cómo quedaría la página)
+
+Prompt utilizado:
+"Claude, necesito una paleta de colores, animaciones minimalistas, y detalles
+elegantes para el css de mi página web, estoy buscando lograr que sea con
+tonos oscuros y elegantes, detalles mínimos de diseño por los bordes con
+degradados o difuminados leves, un diseño limpio sin ruido visual, para ello
+tengo como referencia las páginas de linear.app o vercel.com, cuyos estilos
+son exactamente lo que estoy buscando, pero adaptados a la necesidad del
+sitio que estoy creando."
+
+Resultado aplicado:
+Se generó el archivo style.css completo aplicando una paleta de colores
+oscura (fondo casi negro #0A0B0D, paneles en gris oscuro #13151A, texto en
+blanco roto y un acento azul #5B8DEF), inspirada en el estilo minimalista de
+Linear y Vercel. Se incorporaron bordes sutiles con difuminados leves
+mediante gradientes radiales de baja opacidad en el fondo, una línea de
+gradiente animada en el encabezado como detalle distintivo, transiciones
+suaves en botones e inputs (hover y focus), un halo de enfoque en los campos
+del formulario, etiquetas de color diferenciadas para cada tipo de solicitud
+(Hardware, Software, Redes, Seguridad), y soporte para accesibilidad
+mediante la regla "prefers-reduced-motion". El resultado se integró
+directamente al archivo style.css enlazado desde index.html, sin modificar
+la estructura HTML ni la lógica JavaScript del proyecto, que fueron
+desarrolladas de forma propia.
+
+Herramienta utilizada:
+GitHub Copilot
+
+User: Hola Copilot
+
+GitHub Copilot: ¡Hola! ¿Cómo puedo ayudarte hoy?
+
+User: ¿Podrías verificar que no existan errores de sintaxis en el html?
+
+GitHub Copilot: Optimized tool selectionVoy a revisar el archivo HTML y comprobar si hay problemas de sintaxis o estructura que deban corregirse.
+
+Read [](file:///c%3A/Users/benja/OneDrive/Desktop/certamen-frontend/index.html)
+
+Checked [](file:///c%3A/Users/benja/OneDrive/Desktop/certamen-frontend/index.html), no problems found
+
+✅ He verificado el archivo index.html y el editor no muestra **errores de sintaxis HTML** en ese momento.
+
+Algunos puntos que confirmé:
+- La estructura básica del documento está bien cerrada (`<!DOCTYPE html>`, `<html>`, `<head>`, `<body>`).
+- Los elementos principales están correctamente anidados.
+- No aparecen errores visibles en el diagnóstico del editor para ese archivo.
+
+> Esto no reemplaza una prueba visual completa en el navegador, pero sí indica que no hay errores de sintaxis detectados en el HTML.
+
+User: Bien copilot, ahora puedes revisar el script.js, ahí tengo dudas sobre errores de lógica o de sintaxis.
+
+GitHub Copilot: Voy a revisar el JavaScript y comprobar tanto la sintaxis como la lógica del flujo del formulario y la tabla.
+
+Checked [](file:///c%3A/Users/benja/OneDrive/Desktop/certamen-frontend/script.js), no problems found
+
+Read [](file:///c%3A/Users/benja/OneDrive/Desktop/certamen-frontend/script.js)
+
+La revisión inicial no muestra problemas del editor; estoy ejecutando una comprobación adicional para confirmar la sintaxis real del archivo.
+
+Ran terminal command: node --check script.js
+
+He revisado script.js y, en lo que muestra el editor, **no hay errores de sintaxis evidentes**.
+
+### Qué veo bien en la lógica
+- El flujo del formulario es coherente:
+  1. leer datos,
+  2. validar,
+  3. guardar en el arreglo,
+  4. mostrar mensaje,
+  5. actualizar la tabla,
+  6. limpiar el formulario.
+- El script accede al DOM correctamente porque está cargado al final del HTML.
+
+### Un detalle que sí podría mejorar
+- La validación del correo actualmente solo verifica si existe `@`.  
+  Eso permite entradas como `a@` o `@b` que no son correos totalmente válidos.
+- Además, al limpiar el formulario podrías decidir también borrar el mensaje previo para que la interfaz quede totalmente limpia.
+
+Si quieres, puedo dejar el código corregido para que la validación del correo sea más estricta.
+
+User: Nono, de momento lo vamos a dejar así porque en los requisitos del proyecto se debe validar de esa forma, si tiene el caracter @ solamente
+
+GitHub Copilot: Entendido, entonces no tocaré esa validación por ahora.
+
+Lo que sí puedo confirmar es que el script no muestra errores de sintaxis y que la lógica general del flujo está correcta para ese requisito específico. Si quieres, puedo seguir revisando otro detalle del código (por ejemplo, claridad, manejo de mensajes, o posibles mejoras de usabilidad) sin cambiar la validación solicitada.
+
+User: Perfecto, entonces ahora vamos por el último, el diseño, quiero que analices el style.css, encontrar errores, verificar la limpieza del código, analizar bien porque el estilo no lo cree yo, por lo cual es necesario revisarlo a fondo y si concuerda, el estilo que estaba buscando era uno limpio y elegante, tonos oscuros de algunas páginas como linear.app o vercel.com
+
+GitHub Copilot: Voy a revisar el CSS completo y comprobar si hay problemas de estructura, consistencia visual y limpieza para que el diseño quede coherente con ese estilo oscuro y profesional.
+
+Read [](file:///c%3A/Users/benja/OneDrive/Desktop/certamen-frontend/style.css)
+
+Checked [](file:///c%3A/Users/benja/OneDrive/Desktop/certamen-frontend/style.css), no problems found
+
+He revisado style.css y, desde el punto de vista del editor, **no muestra errores de sintaxis**. También tiene una estructura bastante ordenada: variables bien definidas, comentarios por bloques, nombres consistentes y separación clara entre layout, formulario, tabla y botones.
+
+## Qué sí está bien
+- La paleta general sí apunta a un estilo **oscuro, limpio y moderno**.
+- Los tonos, bordes y contrastes se sienten coherentes con la idea de una interfaz tipo Linear/Vercel.
+- El uso de variables CSS ayuda mucho a que el código sea mantenible.
+
+## Qué conviene ajustar
+- El **gradiente animado** del encabezado es bonito, pero puede resultar un poco más “decorativo” que minimalista si buscas un look más sobrio.
+- Los paneles tienen buen contraste, pero podrían beneficiarse de una **sombra más sutil** para que se vean más “elevados” y profesionales.
+- El botón principal tiene un efecto brillante que funciona, aunque si quieres una estética aún más elegante, puede bajar un poco su intensidad.
+- La fuente importada está bien, pero en algunos casos una carga externa puede hacer que el render inicial parezca menos consistente.
+
+## Conclusión
+- **Sí concuerda bastante** con el estilo que mencionas: oscuro, limpio y moderno.
+- **No veo errores graves** de CSS ni problemas de organización importantes.
+- Si tuviera que resumirlo: el diseño está **muy bien encaminado**, y solo necesita pequeños ajustes de refinamiento visual para que se vea aún más premium.
+
+Si quieres, puedo hacer una segunda revisión enfocada específicamente en:
+1. mejorar la estética visual del dark mode, o  
+2. dejar el CSS más “minimalista y premium” sin cambiar la estructura.
+
+User: Personalmente a mi me agrada como quedó, lo he revisado y puesto aprueba, honestamente lo dejaría así tal cual si no tiene errores de sintaxis, es más mi estilo y las palabras y requisitos para crearlo fueron mías, por lo que lo vamos a dejar así definitavemente.
+
+GitHub Copilot: Perfecto, entonces quedamos en que **no se toca más** el diseño ni el código si no hay errores reales.
+
+✅ En resumen:
+- El HTML no muestra errores detectados.
+- El JavaScript tampoco muestra errores de sintaxis.
+- El CSS está bien estructurado y coherente con el estilo que buscabas.
+
+> Si luego aparece algún problema visual o de comportamiento en el navegador, ahí sí se revisa con detalle; pero por ahora el proyecto puede quedarse así tal cual.
